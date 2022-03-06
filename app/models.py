@@ -9,7 +9,9 @@ class User(UserMixin,db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255),unique=True,nullable=False)
     email = db.Column(db.String(255),unique = True,nullable=False) 
-    image_file = db.Column(db.String(20),nullable=False,default='default.jpeg')
+    bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
+    password_secure = db.Column(db.String(255))
     password = db.Column(db.String(60),nullable=False)
     pitches=db.relationship('Pitch',backref='author',lazy=True)
     
