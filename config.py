@@ -5,7 +5,7 @@ class config:
     """
         Config
     """
-    
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
     SECRET_KEY ='iamkip'
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:kiprono12@localhost/pitches'
     # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
