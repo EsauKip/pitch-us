@@ -36,6 +36,7 @@ class Pitch(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(255),nullable=False)
     content = db.Column(db.text,nullable=False)
+    votes = db.relationship('Vote', backref = 'pitches', lazy = "dynamic")
    
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
     def save_pitch(self):
@@ -69,7 +70,8 @@ class Comment(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_comments(self, id):
-        comment = Comments.query.order_by(Comments.time_posted.desc()).filter_by(pitches_id=id).all()
-        return comment
+    # @classmethod
+    # def get_comments(self, id):
+    #     comment = Comments.query.order_by(Comments.time_posted.desc()).filter_by(pitches_id=id).all()
+    #     return comment
+    
