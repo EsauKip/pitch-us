@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, TextAreaField,RadioField
-from wtforms.validators import Required
+from wtforms.validators import DataRequired
 
 
 
@@ -12,7 +12,7 @@ class PitchForm(FlaskForm):
 
 #Comment Form
 class CommentForm(FlaskForm):
-    comment = TextAreaField('Comment', validators=[Required()])
+    comment = TextAreaField('Comment', validators=[DataRequired()])
     submit = SubmitField()
     vote=RadioField('default field arguments', choices=[('1', 'UpVote'), ('1', 'DownVote')])
 
@@ -21,5 +21,5 @@ class CategoryForm(FlaskForm):
     name = TextAreaField('Category')
     submit = SubmitField()
 class UpdateProfile(FlaskForm):
-    bio = TextAreaField('Tell us about you.',validators = [Required()])
+    bio = TextAreaField('Tell us about you.',validators = [DataRequired()])
     submit = SubmitField('Submit')    
