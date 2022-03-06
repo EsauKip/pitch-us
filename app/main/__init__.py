@@ -1,4 +1,6 @@
 from flask import Flask
+from app import views
+from app import error
 
 # Initializing application
 app = Flask(__name__)
