@@ -93,3 +93,11 @@ def sciences():
     pitches=Pitch.get_pitches('sciences')
     sciences_title='sciences Pitches'
     return render_template('pitches/sciences.html',title=sciences_title, sciences_pitch=pitches)
+@main.route('/category/politics')
+def politics():
+    '''
+    view function to display business pitches
+    '''
+    pitches=Pitch.get_pitches('politics')
+    politics_title = 'Politics Pitches'
+    return render_template('pitches/politics.html',title=politics_title,politics_pitch=pitches)
