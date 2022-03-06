@@ -62,3 +62,34 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+# @main.route('/categories/view_pitch/<int:id>', methods=['GET', 'POST'])
+# @login_required
+# def view_pitch(id):
+#     '''
+#     Function the returns a single pitch for comment to be added
+#     '''
+
+#     print(id)
+#     pitches = Pitch.query.get(id)
+
+#     if pitches is None:
+#         abort(404)
+    
+#     comment = Comments.get_comments(id)
+#     return render_template('pitch.html', pitches=pitches, comment=comment, category_id=id)
+@main.route('/category/tech')
+def tech():
+    '''
+    view function to display sports pitches
+    '''
+    pitches=Pitch.get_pitches('tech')
+    tech_title ='tech Pitches'
+    return render_template('pitches/tech.html',title=tech_title,tech_pitch=pitches)
+@main.route('/category/sciences')
+def sciences():
+    '''
+    view function to display business pitches
+    '''
+    pitches=Pitch.get_pitches('sciences')
+    sciences_title='sciences Pitches'
+    return render_template('pitches/sciences.html',title=sciences_title, sciences_pitch=pitches)
