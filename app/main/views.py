@@ -127,4 +127,14 @@ def post_comment(id):
                            commentform=form,
                            comments=comments,
                            pitch=pitche)
-
+@main.route('/pitch/upvote/<int:id>&<int:vote>')
+@login_required
+def vote(id, vote):
+    counter = 0
+    pitchethrill = Pitch.getPitchId(id)
+    # vote = .get_vote(id)
+    counter += 1
+    print(counter)
+    new_vote = Pitch(likes=counter)
+    new_vote.save_vote()
+    return str(new_vote)
