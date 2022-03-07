@@ -1,4 +1,4 @@
-
+# from  . import app 
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from config import config_options
@@ -7,17 +7,22 @@ from flask_uploads import UploadSet,configure_uploads,IMAGES
 from flask_mail import Mail
 from flask_login import LoginManager
 from flask_simplemde import SimpleMDE
+
+
+ # inititalizing application
+app = Flask(__name__)
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 mail = Mail()
 photos = UploadSet('photos',IMAGES)
 simple = SimpleMDE()
 login_manager = LoginManager()
-login_manager.session_protection = 'strong' #provides different security levels.
+#provides different security levels.
+login_manager.session_protection = 'strong' 
 login_manager.login_view = 'auth.login'
+
 def create_app(config_name):
-    # inititalizing application
-    app = Flask(__name__)
+   
     # creating the app configurations
     app.config.from_object(config_options[config_name])
     # Initializing flask extensions

@@ -6,15 +6,28 @@ from flask_login import login_required,current_user
 from .. import db,photos
 
 # Views
+
 @main.route('/')
 def index():
 
     '''
     View root page function that returns the index page and its data
     '''
-    Category=Category.query_all()
-    title='Pitch'
-    return render_template('index.html',title=title,Category=Category)
+
+    all_pitches=Pitch.query.order_by('id').all()
+    print(all_pitches)
+    title='Pitches App'
+    return render_template('index.html',title=title)
+# @main.route('/')
+# def index():
+
+#     '''
+#     View root page function that returns the index page and its data
+#     '''
+#     Category=Category.query_all()
+#     title='Pitch'
+#     return render_template('index.html',title=title,Category=Category)
+@main.route('/pitch/newpitch', methods=['POST', 'GET'])    
 @login_required
 def new_pitch():
     form = PitchForm()
@@ -60,21 +73,7 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
-# @main.route('/categories/view_pitch/<int:id>', methods=['GET', 'POST'])
-# @login_required
-# def view_pitch(id):
-#     '''
-#     Function the returns a single pitch for comment to be added
-#     '''
 
-#     print(id)
-#     pitches = Pitch.query.get(id)
-
-#     if pitches is None:
-#         abort(404)
-    
-#     comment = Comments.get_comments(id)
-#     return render_template('pitch.html', pitches=pitches, comment=comment, category_id=id)
 @main.route('/category/tech')
 def tech():
     '''
