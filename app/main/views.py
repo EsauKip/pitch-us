@@ -28,11 +28,11 @@ def new_pitch():
         category = form.category.data
         newPitch = form.pitch_info.data
         #update pitch instance
-        new_pitch = Pitch(pitch_title=title,pitch_category=category,pitch_itself=newPitch,user=current_user)
+        new_pitch = Pitch(pitch_title=title,pitch_category=category,pitch_it=newPitch,user=current_user)
         #save pitch
         new_pitch.save_pitch()
-        # db.session.add(new_pitch)
-        # db.session.commit()
+        db.session.add(new_pitch)
+        db.session.commit()
         return redirect(url_for('.index'))
     title = 'Add New pitch'
     return render_template('pitches.html', title=title, pitchesform=form)
