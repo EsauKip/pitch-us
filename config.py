@@ -20,7 +20,7 @@ class config:
 class prodConfig():
     """ production configuration class child class
     """    
-    SQLALCHEMY_DATABASE_URI = 'postgres://dqymjvexvlkdnu:cd96a74c6402bad8fb1fa0c96de4a93782fcc65c293f6f20fa9f0fd958547f4c@ec2-54-209-221-231.compute-1.amazonaws.com:5432/de7rsdpmpu2c42'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://mnciirajecbyku:33c8e4900cc8eded231eb4c14d1c825fbcc9c071c2f69a8056c06886f1238eb2@ec2-44-192-245-97.compute-1.amazonaws.com:5432/dcj2lj45iuek4c'
 class devConfig(config):
     """ dev configuration class child class
     """
