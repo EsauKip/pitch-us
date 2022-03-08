@@ -1,14 +1,17 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, TextAreaField,RadioField
+from wtforms import SubmitField, TextAreaField,RadioField,StringField,SelectField
 from wtforms.validators import DataRequired
 
 
 
 
-#Pitch Form
+
 class PitchForm(FlaskForm):
-    content = TextAreaField('Post Your Pitch')
-    submit = SubmitField('Submit Pitch')
+    
+    title = StringField('Pitch title',validators=[DataRequired()])
+    category = SelectField("Choose Category",choices=[('tech','tech'),('science','science'),('politics','politics')])
+    pitch_info = TextAreaField('Your Pitch',validators=[DataRequired()])
+    submit = SubmitField('Submit')
 
 #Comment Form
 class CommentForm(FlaskForm):

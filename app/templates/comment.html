@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf%}
+{% import 'macros.html' as macro %}
+{%block styles%}
+{{super()}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}"/>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+{%endblock%}
+{%block content%}
+<h3 class="text-center text-uppercase" style="color:#15cf3d;font-family: 'Open Sans', sans-serif;">Comments</h3>
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            {{macro.displayPitches(pitchethrills)}}
+            <h3 class="pt-3"><b>{{pitch.pitch_title}}</b></h3>
+            <hr>
+            <p>{{pitch.pitch_comment}}</p>
+            <p><b>Posted on: </b>{{pitch.posted.strftime('%d.%m.%Y')}}</p>
+            <i id="like" class="fa fa-thumbs-up" aria-hidden="true"></i>
+            <span id='noOfLikes'></span>
+            <i id="dislike" class="fa fa-thumbs-down" aria-hidden="true"></i>
+            <span id='noOfDislikes'></span>
+        </div>
+        <div class="col-md-6">
+            {{ wtf.quick_form(commentform) }}
+            <h3>Display comments</h3>
+            {{macro.displayComments(comments)}}
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $(document).ready(function(){
+        var like=0
+        var dislike=0
+        $("#like").click(function(){
+            like++;
+            document.getElementById("noOfLikes").innerHTML=like
+    });
+    $("#dislike").click(function(){
+            dislike++;
+            document.getElementById("noOfDislikes").innerHTML=dislike
+    });
+    });
+</script>
+{% endblock %}

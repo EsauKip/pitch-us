@@ -18,16 +18,8 @@ def index():
     print(all_pitches)
     title='Pitches App'
     return render_template('index.html',title=title)
-# @main.route('/')
-# def index():
 
-#     '''
-#     View root page function that returns the index page and its data
-#     '''
-#     Category=Category.query_all()
-#     title='Pitch'
-#     return render_template('index.html',title=title,Category=Category)
-@main.route('/pitch/newpitch', methods=['POST', 'GET'])    
+@main.route('/Pitch/newpitch', methods=['POST', 'GET'])    
 @login_required
 def new_pitch():
     form = PitchForm()
@@ -36,12 +28,11 @@ def new_pitch():
         category = form.category.data
         newPitch = form.pitch_info.data
         #update pitch instance
-        new_pitch = Pitch(pitch_title=title,
-                          pitch_category=category,
-                          pitch_itself=newPitch,
-                          user=current_user)
+        new_pitch = Pitch(pitch_title=title,pitch_category=category,pitch_itself=newPitch,user=current_user)
         #save pitch
         new_pitch.save_pitch()
+        # db.session.add(new_pitch)
+        # db.session.commit()
         return redirect(url_for('.index'))
     title = 'Add New pitch'
     return render_template('pitches.html', title=title, pitchesform=form)
@@ -101,7 +92,7 @@ def politics():
 @main.route('/comment/<int:id>', methods=['POST', 'GET'])
 @login_required
 def post_comment(id):
-    pitche = Pitch.getPitchId(id)
+    pit= Pitch.getPitchId(id)
     comments = Comments.get_comments(id)
     if request.args.get("like"):
         pitch = Pitch.query.filter_by(user_id=current_user.id)
@@ -111,7 +102,7 @@ def post_comment(id):
         db.session.commit()
         return str(pitch.likes)
     elif request.args.get("dislike"):
-        pitche.dislikes += 1
+        pit.dislikes += 1
         db.session.add()
         db.session.commit()
         return redirect(".comment")
@@ -120,14 +111,14 @@ def post_comment(id):
         comment = form.comment.data
         new_comment = Comments(comment_itself=comment,
                                user_id=current_user.id,
-                               pitches_id=pitche.id)
+                               pitches_id=pit.id)
         new_comment.save_comment()
-        return redirect(url_for('main.post_comment', id=pitche.id))
+        return redirect(url_for('main.post_comment', id=pit.id))
     return render_template('comment.html',
                            commentform=form,
                            comments=comments,
-                           pitch=pitche)
-@main.route('/pitch/upvote/<int:id>&<int:vote>')
+                           pitch=pit)
+@main.route('/Pitch/upvote/<int:id>&<int:vote>')
 @login_required
 def vote(id, vote):
     counter = 0
@@ -138,3 +129,10 @@ def vote(id, vote):
     new_vote = Pitch(likes=counter)
     new_vote.save_vote()
     return str(new_vote)
+@main.route('/user/<uname>')
+@login_required
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort(404)
+    return render_template("profile/profile.html", user = user)
