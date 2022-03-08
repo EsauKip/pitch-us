@@ -1,4 +1,4 @@
-<!-- # pitch-us
+# pitch-us
 * this is a web based application that allows the user to view pitches created by other people,create theirs,comment on already created pitche and vote to or against the pitch created
 # Technologies used
 
@@ -19,4 +19,4 @@
 * kipronoesau28@gmail.com
 # License
 * MIT License
- -->
+
